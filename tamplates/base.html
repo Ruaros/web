@@ -1,0 +1,77 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta property="og:description" content="Проект эффектного жилого дома - проекты дачных домов от лучших архитекторов мира. Построй дом своей мечты вместе с нами.">
+    <title>ИП Борлакова А.А.</title>
+    <link href="/static/main.css" rel="stylesheet" />
+    <link href="/static/bootstrap_r_.css" rel="stylesheet" />
+    <link href="/static/bootstrap.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+      <nav class="menu">
+      <ul class="topmenu">
+        <li><a href="{% url 'home_url' %}">Главная</a></li>
+        <li>
+          <a href="#" class="down">Услуги</a>
+          <ul class="submenu">
+            <li><a href="{% url 'design_url' %}">Проектирование</a></li>
+            <li><a href="{% url 'expertise_url' %}">Экспертиза</a></li>
+            <li><a href="{% url 'building_url' %}">Строительство</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'done_projects_url' %}">Реализованные проекты</a></li>
+        <li><a href="#">Готовые решения</a>
+          <ul class="submenu">
+            <li><a href="{% url 'houses_url' %}">Частные дома</a></li>
+            <li><a href="{% url 'hotels_url' %}">Гостиницы</a></li>
+            <li><a href="{% url 'complexes_url' %}">Животноводческие комплексы</a></li>
+            <li><a href="{% url 'ets_url' %}">Мойки, заправки и т.д.</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'contacts_url' %}">Контакты</a></li>
+      </ul>
+    </nav>
+
+    
+    <div class="telo1">
+        <div id="triangle_right"> </div>
+            {% block content %}
+                {{ content }}
+            {% endblock %}
+        {% if request.user.is_authenticated %}
+            
+            <div class="admin-panel align-items-center">
+            
+            {% if request.user.is_staff %}
+                <div style="margin-top:5px!important">    
+                    <a href="/adminkin/">Admin panel</a>
+                </div>                
+            {% endif %}
+            {% block admin-panel %} {% endblock %}
+
+            </div>
+        {% endif %}
+
+
+        <div id="triangle_left"> </div>
+    </div>
+
+  <footer>
+      <div class="footerclass">
+        {% block content_basement %}
+            {{ content_basement }}
+        {% endblock %}
+      </div>
+  </footer>
+  
+  </body>
+</html>

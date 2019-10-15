@@ -1,0 +1,229 @@
+﻿{% extends 'veb_site/base_veb.html' %}
+
+{% block content %}
+
+    <div style="padding:5px 5px">
+         <div style="float: left; width: 80%;">
+                <div id="rcarousel" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#rcarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#rcarousel" data-slide-to="1" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="2" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="3" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="4" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="5" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="6" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="7" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="8" style="background-color:black; height:5px"></li>                    
+                    <li data-target="#rcarousel" data-slide-to="9" style="background-color:black; height:5px"></li>
+                    <li data-target="#rcarousel" data-slide-to="10" style="background-color:black; height:5px"></li>
+                </ul>
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ main }}">
+                    </div>
+                    {% for card in cards %}
+                    <div class="carousel-item">
+                        <img src="{{ card }}">
+                    </div>
+                    {% endfor %}
+                </div>
+  
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#rcarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#rcarousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+
+            </div> 
+         <div style='float: right; width: 20%; {% if ВидПроекта == 'done_projects' %} height:700px; {% endif %} padding-right:3%'>
+           
+             {% if dostup %}
+             <div style='float: left; width: 50%;'>
+                 <form action="{% url 'update_project_url'  article=Артикль type=ВидПроекта %}" method="get" style="">
+                     <div>
+                         <button type="submit" class="btn btn1 btn-primary">Edit</button>
+                     </div>
+                 </form>
+             </div>
+             <div style='float: right; width: 50%;'>
+                 <form action="{% url 'delete_project_url'  article=Артикль type=ВидПроекта %}" method="get" style="">
+                     <div>
+                         <button type="submit" class="btn btn1 btn-danger">Delete</button>
+                     </div>
+                 </form>
+             </div>
+             {% endif %}
+             {% if Цена != None %}
+                 <div><h4>Цена: {{ Цена }} руб.</h4></div>
+             {% endif %}
+             <table border="1" width="100%" cellpadding="5">
+                 {% if request.user.is_authenticated and request.user.is_staff %}
+                 <tr>
+                     <td width="200">Автор проекта:</td>
+                     <td width="80">{{ АвторПроекта }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Артикль != None and ВидПроекта != 'done_projects' %}
+                 <tr>
+                     <td width="200">Артикул:</td>
+                     <td width="80">{{ Артикль }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Этажность != None %}
+                 <tr>
+                     <td width="200">Этажность:</td>
+                     <td width="80">{{ Этажность }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if ОбщаяПлощадь != None %}
+                 <tr>
+                     <td width="200">Общая площадь:</td>
+                     <td width="80">{{ ОбщаяПлощадь }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if ЖилаяПлощадь != None %}
+                 <tr>
+                     <td width="200">Жилая площадь:</td>
+                     <td width="80">{{ ЖилаяПлощадь }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if ВысотаЗдания != None %}
+                 <tr>
+                     <td width="200">Высота здания:</td>
+                     <td width="80">{{ ВысотаЗдания }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if ВысотаПотолка != None %}
+                 <tr>
+                     <td width="200">Высота потолка:</td>
+                     <td width="80">{{ ВысотаПотолка }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if ПлощадьКрыши != None %}
+                 <tr>
+                     <td width="200">Площадь крыши:</td>
+                     <td width="80">{{ ПлощадьКрыши }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if УголНаклонаКровли != None %}
+                 <tr>
+                     <td width="200">Угол наклона кровли:</td>
+                     <td width="80">{{ УголНаклонаКровли }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if КоличествоСпален != None %}
+                 <tr>
+                     <td width="200">Количество спален:</td>
+                     <td width="80">{{ КоличествоСпален }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if КоличествоСанузлов != None %}
+                 <tr>
+                     <td width="200">Количество санузлов:</td>
+                     <td width="80">{{ КоличествоСанузлов }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if НаличиеГаража != None %}
+                 <tr>
+                     <td width="200">Наличие гаража:</td>
+                     <td width="80">{{ НаличиеГаража }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Кубатура != None %}
+                 <tr>
+                     <td width="200">Кубатура:</td>
+                     <td width="80">{{ Кубатура }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if МинимальныйРазмерУчастка_ширина != None %}
+                 <tr>
+                     <td width="200">Минимальный размер участка (ширина):</td>
+                     <td width="80">{{ МинимальныйРазмерУчастка_ширина }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if МинимальныйРазмерУчастка_длина != None %}
+                 <tr>
+                     <td width="200">Минимальный размер участка (длина):</td>
+                     <td width="80">{{ МинимальныйРазмерУчастка_длина }}</td>
+                 </tr>
+                 {% endif %}
+             </table>
+
+             <table border="1" width="100%" cellpadding="5">
+                 {% if Стены != None %}
+                 <tr>
+                     <td width="200">Стены:</td>
+                     <td width="80">{{ Стены }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Перекрытие != None %}
+                 <tr>
+                     <td width="200">Перекрытие:</td>
+                     <td width="80">{{ Перекрытие }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Кровля != None %}
+                 <tr>
+                     <td width="200">Кровля:</td>
+                     <td width="80">{{ Кровля }}</td>
+                 </tr>
+                 {% endif %}
+
+                 {% if Фундамент != None %}
+                 <tr>
+                     <td width="200">Фундамент:</td>
+                     <td width="80">{{ Фундамент }}</td>
+                 </tr>
+                 {% endif %}
+             </table>
+
+             {% if not ВидПроекта == 'done_projects' %} 
+             <form action="{% url 'feedback_url' %}" method="get" style="">
+                 <div style="margin-left:25px">
+                     <h3>Заказать проект</h3>
+                     <input type="hidden" value={{ Артикль }} name="article" />
+                     <button type="submit" class="btn btn-success">Подать заявку</button>
+                 </div>
+             </form>
+             {% endif %}
+
+         </div>   
+    </div>
+    
+     <div style="padding:30px">
+        {% if ВидПроекта == 'done_projects' %} 
+         <b>
+            {{ Описание }}   
+         </b>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+  
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}

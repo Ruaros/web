@@ -1,0 +1,45 @@
+﻿{% extends 'veb_site/base_veb.html' %}
+
+
+{% block content %}
+    <form enctype="multipart/form-data" action="{% url 'create_project_url' %}" method="post">
+        
+        {% csrf_token %}
+      
+        <div style="margin-left:40%">
+                {% for field in form %}
+                    {% if not request.user.is_staff %}
+                        {% if field.label != "Автор" %}
+                            {% if field.errors %}
+                                <div style="width:50%" class="alert alert-danger">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+
+                            <div style="width:150px; display:block" class="form-group">
+                                {{ field.label }}
+                                {{ field }}
+                            </div>
+                        {% endif %} 
+                    {% else %}
+                        {% if field.errors %}
+                            <div style="width:50%" class="alert alert-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+
+                        <div  style="width:150px; display:block" class="form-group">
+                            {{ field.label }}
+                            {{ field }}
+                        </div>
+            
+                    {% endif %}
+                {% endfor %} 
+            <button type="submit" class="btn btn-success">Создать проект</button>
+         </div>
+    </form>
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}

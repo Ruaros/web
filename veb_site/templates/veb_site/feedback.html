@@ -1,0 +1,35 @@
+﻿{% extends 'veb_site/base_veb.html' %}
+
+
+{% block content %}
+    <form action="{% url 'feedback_url' %}" method="post" class="form_feeding">
+         {% csrf_token %} 
+         <div style="padding-left:40%">
+         {% if not error %}
+         {% for field in form %}
+            <div class="form-group">
+                {% if field.label != 'Артикул проекта' %}
+                    {{ field.label }}
+                    {{ field }}
+                {% endif %}
+                {% if field.label == 'Артикул проекта' and article != None %}
+                    {{ field.label }}
+                    {{ field }}
+                {% endif %}
+            </div>
+         {% endfor %}
+         <button type="submit" class="btn btn-primary">Отправить</button> 
+         {% endif %}
+        </div>
+        {% if error %}
+        <div class="form_error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+    </form>
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}

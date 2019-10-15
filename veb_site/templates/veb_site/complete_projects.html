@@ -1,0 +1,47 @@
+﻿{% extends 'veb_site/base_veb.html' %}
+
+
+{% block content %}
+      
+        <div style='float: left; width: 10%;  padding-right:3%'>
+            <form action="{% url 'filtrate_url' type=ВидПроекта %}" method="get" style="">
+                <div>
+                    {% for key0, value0 in values.items %}
+                        <div style="margin: 10px;">
+                            <div style="white-space: nowrap;">
+                                {{ key0 }}:
+                            </div>
+                            {% for key1, value1 in value0.items %}
+                                <input type="number" name="{{key1}}" value="{{value1}}" placeholder="{{key1|slice:3}}"/>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div style="display:inline-flex;">
+                    <button style="z-index: 999999; width:90px; margin-right:3px; margin-left:5px; position: relative;" type="submit" name ="Ok"  class="btn btn-success">Ok</button>
+                    <button style="width:90px" type="submit" name ="Cancel" class="btn btn-success">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div style='float: right; width: 90%;  padding-left:3%'>
+            <div class="card-group">
+                {% for image in content %}
+                    <div style="margin-top:5px" class="card, col-md-2">
+                        <a class="r_href" href="{% url 'project_page_url' article=image.article type=image.typing %}">
+                            <img src="{{image.img_main.url}}" class="card-img-top" width="150" height="150" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ image.title }}</h5>
+                                <p class="card-text">Артикул: {{ image.article }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}

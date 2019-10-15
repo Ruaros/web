@@ -1,0 +1,39 @@
+﻿
+{% extends 'veb_site/base_veb.html' %}
+
+{% block content %}
+    <div class="telo3" style="float: left;" >
+            <strong class="font_size">КОНТАКТНАЯ ИНФОРМАЦИЯ</strong><br>
+            <h4 class="font_size">ИП Борлакова Асият Ахматовна</h4>
+            <p style="font-size: 120%; text-indent: 15px;">ИНН 09121111111</p>
+            <p style="font-size: 120%; text-indent: 15px;">ОГРН 121315165</p>
+      
+            <div class="font_size">
+                <img src="/static/img/ico/icons8-marker-40.png" class="icons" />
+                <b class="font_size">Адрес: {{ adres }}</b>
+            </div>
+
+            <div class="font_size">
+                <img src="/static/img/ico/icons8-telefon-40.png" class="icons" />
+                <b class="font_size">Телефон: <a href="{{ telephone }}">{{ telephone }}</a></b>
+            </div>
+
+            <div class="font_size"> <img src="/static/img/ico/icons8-el.-adres-40.png" class="icons" />
+                <b class="font_size">Электронная почта: <a href="{{ email_href }}">{{ email }}</a></b>
+            </div>
+
+            <form action="{% url 'feedback_url' %}" method="get" style="padding:20px 30px ">
+                <div>
+                    <h3>Подать заявку на услугу</h3>
+                    <button type="submit" class="btn btn-success">Создать заявку</button>
+                </div>
+            </form>
+
+        </div> 
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+﻿{% extends 'veb_site/base_veb.html' %}
+
+
+{% block content %}
+      
+            <div class="card-group">
+                {% for image in content %}
+                    <div style="margin-top:5px" class="card, col-md-5">
+                        <a class="r_href" href="{% url 'project_page_url' article=image.article type=image.typing %}">>
+                            <img src="{{image.img_main.url}}" class="card-img-top" width="250" height="250" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ image.title }}</h5>
+                                <p class="card-text">Артикул: {{ image.article }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+ 
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}

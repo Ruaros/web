@@ -1,0 +1,11 @@
+{% extends 'veb_site/base_veb.html' %}
+
+
+{% block content %}
+    {% csrf_token %}
+    {{ content }}
+{% endblock %}
+
+{% block content_basement %}
+    {{ content_basement }}
+{% endblock %}
